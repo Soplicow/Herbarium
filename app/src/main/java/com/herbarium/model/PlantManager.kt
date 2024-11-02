@@ -6,6 +6,14 @@ import android.media.Image
 class PlantManager {
     private val plants: MutableList<Plant> = mutableListOf()
 
+    fun getPlants(): List<Plant> = plants
+
+    fun getPlantByName(name: String): Plant? = plants.firstOrNull { it.name == name }
+
+    fun getPlantByNameLatin(nameLatin: String): Plant? = plants.firstOrNull { it.nameLatin == nameLatin }
+
+    fun deletePlant(plant: Plant) = plants.remove(plant)
+
     fun addPlant(
         name: String,
         nameLatin: String?,
@@ -14,25 +22,17 @@ class PlantManager {
         locationString: String?,
         image: Image
     ) {
-        val newPlant = Plant.create(Plant.Builder()
+        val newPlant = PlantBuilder()
             .setName(name)
             .setNameLatin(nameLatin)
             .setDescription(description)
             .setLocation(location)
             .setLocationString(locationString)
             .setImage(image)
-        )
+            .build()
 
         plants.add(newPlant)
     }
-
-    fun getPlants(): List<Plant> = plants
-
-    fun getPlantByName(name: String): Plant? = plants.firstOrNull { it.getName == name }
-
-    fun getPlantByNameLatin(nameLatin: String): Plant? = plants.firstOrNull { it.getNameLatin == nameLatin }
-
-    fun deletePlant(plant: Plant) = plants.remove(plant)
 
     fun updatePlant(
         plant: Plant,
@@ -43,15 +43,16 @@ class PlantManager {
         updatedLocationString: String?,
         updatedImage: Image
     ) {
-        val updatedPlant = Plant.create(Plant.Builder()
-        .setName(updatedName ?: plant.getName)
-        .setNameLatin(updatedNameLatin?: plant.getNameLatin)
-        .setDescription(updatedDescription?: plant.getDescription)
-        .setLocation(updatedLocation?: plant.getLocation)
-        .setLocationString(updatedLocationString?: plant.getLocationString)
-        .setImage(updatedImage?: plant.getImage)
-        )
+        val updatedPlant = PlantBuilder()
+        .setName(updatedName ?: plant.name)
+        .setNameLatin(updatedNameLatin?: plant.nameLatin)
+        .setDescription(updatedDescription?: plant.description)
+        .setLocation(updatedLocation?: plant.location)
+        .setLocationString(updatedLocationString?: plant.locationString)
+        .setImage(updatedImage?: plant.image)
+        .build()
 
         plants[plants.indexOf(plant)] = updatedPlant
     }
+
 }
