@@ -1,4 +1,4 @@
-package com.herbarium
+package com.herbarium.ui.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

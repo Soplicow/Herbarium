@@ -1,4 +1,4 @@
-package com.herbarium.model
+package com.herbarium.data.local.model
 
 import android.location.Location
 import android.media.Image
@@ -21,6 +21,6 @@ class PlantBuilder {
     fun build(): Plant {
         val name = this.name ?: throw IllegalArgumentException("Name is required")
         val image = this.image ?: throw IllegalArgumentException("Image is required")
-        return Plant(name, nameLatin, description, location, locationString, image)
+        return Plant(0, name, nameLatin, description, location, locationString, image)
     }
 }
