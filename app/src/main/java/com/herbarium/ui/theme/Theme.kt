@@ -33,6 +33,18 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+private val HerbariumLightScheme = lightColorScheme(
+    primary = Vanilla,
+    secondary = Emerald,
+    tertiary = FernGreen
+)
+
+private val HerbariumDarkScheme = darkColorScheme(
+    tertiary = FernGreen,
+    secondary = CaiPolyGreen,
+    primary = RaisinBlack
+)
+
 @Composable
 fun HerbariumTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -46,9 +58,9 @@ fun HerbariumTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
+        darkTheme -> HerbariumDarkScheme
+        else -> HerbariumLightScheme
+    } // If dynamic color scheme is not supported default to custom color scheme
 
     MaterialTheme(
         colorScheme = colorScheme,

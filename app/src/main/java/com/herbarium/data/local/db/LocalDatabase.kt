@@ -10,8 +10,8 @@ import com.herbarium.data.local.model.User
 @Database(entities = [Plant::class, User::class], version = 1, exportSchema = false)
 abstract class LocalDatabase : RoomDatabase() {
 
-    abstract fun plantDao(): PlantDao  // Create a DAO for interacting with the Plant table in the database.
-    abstract fun userDao(): UserDao  // Create a DAO for interacting with the User table in the database.
+    abstract fun getPlantDao(): PlantDao  // Create a DAO for interacting with the Plant table in the database.
+    abstract fun getUserDao(): UserDao  // Create a DAO for interacting with the User table in the database.
 
     companion object {
         @Volatile
