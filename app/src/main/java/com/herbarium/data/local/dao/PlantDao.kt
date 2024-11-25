@@ -1,8 +1,8 @@
-package com.herbarium.data.local.db
+package com.herbarium.data.local.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.herbarium.data.local.model.Plant
+import com.herbarium.data.model.Plant
 
 @Dao
 interface PlantDao {

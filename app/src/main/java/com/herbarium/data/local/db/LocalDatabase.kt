@@ -2,10 +2,12 @@ package com.herbarium.data.local.db
 
 import android.content.Context
 import androidx.room.Database
-import com.herbarium.data.local.model.Plant
+import com.herbarium.data.model.Plant
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.herbarium.data.local.model.User
+import com.herbarium.data.local.dao.PlantDao
+import com.herbarium.data.local.dao.UserDao
+import com.herbarium.data.model.User
 
 @Database(entities = [Plant::class, User::class], version = 1, exportSchema = false)
 abstract class LocalDatabase : RoomDatabase() {

@@ -9,6 +9,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
@@ -36,20 +37,20 @@ private val LightColorScheme = lightColorScheme(
 private val HerbariumLightScheme = lightColorScheme(
     primary = Vanilla,
     secondary = Emerald,
-    tertiary = FernGreen
+    background = FernGreen
 )
 
 private val HerbariumDarkScheme = darkColorScheme(
-    tertiary = FernGreen,
+    primary = FernGreen,
     secondary = CaiPolyGreen,
-    primary = RaisinBlack
+    background = RaisinBlack,
 )
 
 @Composable
 fun HerbariumTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -63,7 +64,7 @@ fun HerbariumTheme(
     } // If dynamic color scheme is not supported default to custom color scheme
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = HerbariumDarkScheme,
         typography = Typography,
         content = content
     )

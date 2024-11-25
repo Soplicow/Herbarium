@@ -1,12 +1,17 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
     namespace = "com.herbarium"
     compileSdk = 34
+
+    android.buildFeatures.buildConfig = true
 
     defaultConfig {
         applicationId = "com.herbarium"
@@ -16,6 +21,25 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val supabaseData = project.rootProject.file("supabase.properties")
+        val properties = Properties()
+        properties.load(supabaseData.inputStream())
+
+        val supabase_anon_key = properties.getProperty("supabase.anon_key") ?: ""
+        val supabase_url = properties.getProperty("supabase.url") ?: ""
+
+        buildConfigField(
+            type = "String",
+            name = "SUPABASE_ANON_KEY",
+            value = supabase_anon_key
+        )
+
+        buildConfigField(
+            type = "String",
+            name = "SUPABASE_URL",
+            value = supabase_url
+        )
     }
 
     buildTypes {
@@ -40,7 +64,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -58,4 +81,22 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Supabase
+    implementation(platform("io.github.jan-tennert.supabase:bom:3.0.1"))
+    implementation("io.github.jan-tennert.supabase:postgrest-kt")
+    implementation("io.github.jan-tennert.supabase:storage-kt")
+
+    implementation("io.ktor:ktor-client-android:3.0.0")
+    implementation("io.ktor:ktor-utils:3.0.0")
+    implementation("io.ktor:ktor-client-core:3.0.0")
+
+    // Hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+    //other
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0") // Latest version as of now
+
 }

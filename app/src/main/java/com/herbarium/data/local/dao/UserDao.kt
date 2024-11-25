@@ -1,5 +1,6 @@
-package com.herbarium.data.local.db
+package com.herbarium.data.local.dao
 
+import android.provider.ContactsContract.CommonDataKinds.Email
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
@@ -7,7 +8,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.herbarium.data.local.model.User
+import com.herbarium.data.model.User
 
 @Dao
 interface UserDao {
@@ -32,7 +33,7 @@ interface UserDao {
 
     // Get user by email
     @Query("SELECT * FROM user_table WHERE email = :email LIMIT 1")
-    suspend fun getUserByEmail(email: String): User?
+    suspend fun getUserByEmail(email: Email): User?
 
     // Get all users
     @Query("SELECT * FROM user_table")
