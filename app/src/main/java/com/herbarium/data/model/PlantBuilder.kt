@@ -1,17 +1,16 @@
 package com.herbarium.data.model
 
-import android.location.Location
-import android.media.Image
+import java.util.UUID
 
 class PlantBuilder {
-    private var id: Long = 0
+    private var id: String = UUID.randomUUID().toString()
     private var name: String? = null
     private var nameLatin: String? = null
     private var description: String? = null
     private var location: GeoLocation? = null
     private var imageUrl: String? = null
 
-    fun setId(id: Long) = apply { this.id = id }
+    fun setId(id: String) = apply { this.id = id } // Should be used only when mapping from database to local
     fun setName(name: String) = apply { this.name = name }
     fun setNameLatin(nameLatin: String?) = apply { this.nameLatin = nameLatin }
     fun setDescription(description: String?) = apply { this.description = description }

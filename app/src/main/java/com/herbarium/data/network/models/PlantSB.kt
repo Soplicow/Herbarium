@@ -1,13 +1,11 @@
-package com.herbarium.data.local.entities
+package com.herbarium.data.network.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.herbarium.data.model.GeoLocation
 import kotlinx.datetime.Instant
+import kotlinx.serialization.Serializable
 
-@Entity(tableName = "plants")
-data class PlantEntity(
-    @PrimaryKey(autoGenerate = false)
+@Serializable
+data class PlantSB(
     val id: String,
     val name: String,
     val nameLatin: String?,
@@ -15,7 +13,5 @@ data class PlantEntity(
     val location: GeoLocation?,
     val imageUrl: String?,
     val lastModified: Instant?,
-    val isSynced: Boolean,
     val isDeleted: Boolean
 )
-// TODO: Should those fields be public??? It would make things easier ig

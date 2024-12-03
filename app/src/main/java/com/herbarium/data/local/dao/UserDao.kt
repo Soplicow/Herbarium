@@ -28,18 +28,18 @@ interface UserDao {
     suspend fun delete(user: User)
 
     //Delete all users DON'T USE THIS lmao for testing only
-    @Query("DELETE FROM user_table")
+    @Query("DELETE FROM users")
     suspend fun deleteAll()
 
     // Get user by email
-    @Query("SELECT * FROM user_table WHERE email = :email LIMIT 1")
+    @Query("SELECT * FROM users WHERE email = :email LIMIT 1")
     suspend fun getUserByEmail(email: Email): User?
 
     // Get all users
-    @Query("SELECT * FROM user_table")
+    @Query("SELECT * FROM users")
     fun getAllUsers(): LiveData<List<User>>
 
     // Get user by id
-    @Query("SELECT * FROM user_table WHERE id = :id LIMIT 1")
+    @Query("SELECT * FROM users WHERE id = :id LIMIT 1")
     suspend fun getUserById(id: Int): User?
 }

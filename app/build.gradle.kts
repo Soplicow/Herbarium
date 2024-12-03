@@ -28,6 +28,7 @@ android {
 
         val supabase_anon_key = properties.getProperty("supabase.anon_key") ?: ""
         val supabase_url = properties.getProperty("supabase.url") ?: ""
+        val supabase_service_key = properties.getProperty("supabase.service_key") ?: ""
 
         buildConfigField(
             type = "String",
@@ -39,6 +40,12 @@ android {
             type = "String",
             name = "SUPABASE_URL",
             value = supabase_url
+        )
+
+        buildConfigField(
+            type = "String",
+            name = "SUPABASE_SERVICE_KEY",
+            value = supabase_service_key
         )
     }
 
@@ -87,6 +94,7 @@ dependencies {
     implementation("io.github.jan-tennert.supabase:postgrest-kt")
     implementation("io.github.jan-tennert.supabase:storage-kt")
 
+    // Ktor
     implementation("io.ktor:ktor-client-android:3.0.0")
     implementation("io.ktor:ktor-utils:3.0.0")
     implementation("io.ktor:ktor-client-core:3.0.0")

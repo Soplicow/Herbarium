@@ -1,14 +1,12 @@
 package com.herbarium.data.model
 
-import android.provider.ContactsContract
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import android.provider.ContactsContract.CommonDataKinds.Email
+import java.util.UUID
 
-@Entity(tableName = "user_table")
 data class User (
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    val id: String = UUID.randomUUID().toString(),
     val name: String,
-    val email: ContactsContract.CommonDataKinds.Email,
-    val passwordHash: Int,
+    val email: Email,
+    val passwordHash: String,
     val salt: String
 )
